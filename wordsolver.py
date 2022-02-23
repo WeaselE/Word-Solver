@@ -21,11 +21,11 @@ class WordFinder():
         Reads in Word List as txt,
         with one word per line, and builds a list to be used for searches.
         """
-        print('building word list.')
+        # print('building word list.')
         try:
             with open(word_list, 'r', encoding='UTF-8') as file:
                 content = file.read()
-                print('finished building word list.')
+                # print('finished building word list.')
                 return {word : len(word) for word in content.split()}
         except FileNotFoundError:
             print('Opening file failed. Try again.')
@@ -41,7 +41,7 @@ class WordFinder():
         Permutates through all combinations of letter provided,
         and returns list of words matching the word list.
         """
-        print('creating possibilities.')
+        # print('creating possibilities.')
         r_length = len(letters)
         possibilities = []
 
@@ -49,7 +49,7 @@ class WordFinder():
             possibilities[0:0] = [''.join(word)
                                   for word in list(permutations(letters, r=r_l))]
             # print(possibilities)
-        print('possibilities created.')
+        # print('possibilities created.')
         # print(possibilities)
         return [word for word in possibilities if word in self.word_list.keys()]
 
@@ -98,11 +98,11 @@ class WordFinder():
         """
         return [self.get_word_points(word) for word in matches]
 
-    def search(self, letters: str = 'DTHEITN') -> None:
+    def search(self, letters: str) -> None:
         """
         Function Docstring
         """
-        matches = self.matches_list(letters)
+        matches = self.matches_list(letters.upper())
         # print(matches)
         matches_with_points = self.point_word_list(matches)
         # print(matches_with_points)
@@ -112,8 +112,8 @@ class WordFinder():
         print('Word\tScore\tLength')
         for match in sorted(matches_with_points, key=lambda x : x[1], reverse=True):
             print(f'{match[0]}\t{match[1]}\t{self.word_list[match[0]]}')
+        # sleep(99999)
 
 
 Finder = WordFinder()
-# print(Finder.word_list)
-Finder.search()
+Finder.search('dtheit')

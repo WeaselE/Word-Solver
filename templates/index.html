@@ -18,13 +18,20 @@
         <h2>Word Finder</h2>
         <br>
         <form method='post'>
-            <fieldset>
-                <textarea name="letters" id="letters" cols="30" rows="3" for="letters" type="text"
-                    style="width: 500px;"></textarea>
-            </fieldset>
+            <div class="row justify-content-md-center">
+                <fieldset>
+
+                    <div class="col-sm"><textarea class="form-control col-sm" name="letters" id="letters" cols="30"
+                            rows="3" for="letters" type="text" style="width: 500px;"></textarea></div>
+
+
+                </fieldset>
+            </div>
             <br>
-            <button type="submit" value="Submit" class="btn btn-primary">Find
-                Words</button>
+            <div class="row justify-content-md-center">
+                <button type="submit" value="Submit" class="btn btn-primary col-4 middle">Find
+                    Words</button>
+            </div>
         </form>
         {% endblock %}
 

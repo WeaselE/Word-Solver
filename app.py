@@ -2,7 +2,6 @@ from flask import Flask, render_template, request, redirect, url_for
 from wordsolver import WordFinder
 
 app = Flask(__name__)
-app.config.from_pyfile(f'{app.root_path}/config_defaults.py')
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -23,9 +22,9 @@ def results(letters):
     """
     Finder = WordFinder()
     result = Finder.search(letters)
-    print(result)
+    # print(result)
     return render_template('results.html', letters=letters, results=result)
 
 
-if __name__ == '__main__':
-    app.run(debug=True)
+# if __name__ == '__main__':
+#     app.run(debug=True)

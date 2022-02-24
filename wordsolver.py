@@ -26,7 +26,7 @@ class WordFinder():
             with open(word_list, 'r', encoding='UTF-8') as file:
                 content = file.read()
                 # print('finished building word list.')
-                return {word : len(word) for word in content.split()}
+                return {word: len(word) for word in content.split()}
         except FileNotFoundError:
             print('Opening file failed. Try again.')
             sleep(30)
@@ -98,7 +98,7 @@ class WordFinder():
         """
         return [self.get_word_points(word) for word in matches]
 
-    def search(self, letters: str) -> None:
+    def search(self, letters: str) -> list:
         """
         Function Docstring
         """
@@ -107,13 +107,18 @@ class WordFinder():
         matches_with_points = self.point_word_list(matches)
         # print(matches_with_points)
 
-        # pretty print results, ordered from highest points to lowest.
-        print('\nWord Results:')
-        print('Word\tScore\tLength')
-        for match in sorted(matches_with_points, key=lambda x : x[1], reverse=True):
-            print(f'{match[0]}\t{match[1]}\t{self.word_list[match[0]]}')
-        # sleep(99999)
+        # Collect and organize results as list of lists.
+        # print('\nWord Results:\n')
+        # print('\tWord\t|\tScore\t|\tLength\n')
+        # print('-'*50)
+        Results = []
+        for match in sorted(matches_with_points, key=lambda x: x[1], reverse=True):
+
+            Results.append([match[0], match[1], self.word_list[match[0]]])
+        return Results
 
 
-Finder = WordFinder()
-Finder.search('dtheit')
+if __name__ == '__main__':
+    Finder = WordFinder()
+    for match in Finder.search('rhrevreq'):
+        print(f'\t{match[0]}\t|\t{match[1]}\t|\t{Finder.word_list[match[0]]}')
